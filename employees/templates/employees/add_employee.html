@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Employee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f3;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+        }
+
+        form {
+            max-width: 480px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 18px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            color: #0056b3;
+        }
+
+        .message {
+            text-align: center;
+            color: green;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add New Employee</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="id">Employee ID</label>
+        <input type="number" name="id" id="id" required>
+
+        <label for="name">Full Name</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="position">Job Title</label>
+        <input type="text" name="position" id="position" required>
+
+        <label for="salary">Salary (₹)</label>
+        <input type="number" name="salary" id="salary" step="0.01" required>
+
+        <button type="submit">Add Employee</button>
+    </form>
+
+    <div class="back-link">
+        <a href="{% url 'employee_list' %}">← Back to Employee List</a>
+    </div>
+</body>
+</html>
